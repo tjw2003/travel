@@ -1,47 +1,46 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app">
+    <header>
+      <nav>
+        <router-link to="/">Login</router-link>
+        <router-link to="/dashboard">Dashboard</router-link>
+      </nav>
+    </header>
+    
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped>
+<script>
+export default {
+  name: 'App',
+};
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
 header {
-  line-height: 1.5;
+  background-color: #f8f9fa;
+  padding: 10px 0;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+nav {
+  margin: 0;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+router-link {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #42b983;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+router-link.active {
+  font-weight: bold;
 }
 </style>
