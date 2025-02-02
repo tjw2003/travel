@@ -2,21 +2,11 @@
     <div class="login-container">
         <h2>登录</h2>
         <!-- <form @submit.prevent="handleSubmit"> -->
-        <form>
-            <div class="form-group">
-                <label for="username">用户名</label>
-                <input type="text" id="username" v-model="username" required />
-            </div>
-
-            <div class="form-group">
-                <label for="password">密码</label>
-                <input type="password" id="password" v-model="password" required />
-            </div>
-
-            <!-- <button type="submit" :disabled="isSubmitting">登录</button> -->
-            <button>登录</button>
+        <form @submit.prevent="handleLogin">
+            <input v-model="username" type="text" placeholder="Username" />
+            <input v-model="password" type="password" placeholder="Password" />
+            <button type="submit">Login</button>
         </form>
-
         <!-- <p v-if="errorMessage" class="error">{{ errorMessage }}</p> -->
     </div>
 </template>
@@ -32,38 +22,31 @@ export default {
         };
     },
     methods: {
-        //   async handleSubmit() {
-        //     this.isSubmitting = true;
-        //     this.errorMessage = '';
+        async handleLogin() {
+            const userId = this.username;
+            this.$router.push(`/dashboard/${userId}`);
+            // 模拟登录过程，通常你会通过 API 验证用户
+            // const userId = await this.mockLogin(this.username, this.password);
+            // if (userId) {
+            //     // 登录成功，将用户 id 存储到 localStorage 或 Vuex 中
+            //     localStorage.setItem('userId', userId);
 
-        //     // 模拟一个登录请求
-        //     try {
-        //       // 假设登录 API
-        //       const response = await this.loginApi(this.username, this.password);
-        //       if (response.success) {
-        //         this.$router.push('/dashboard'); // 登录成功后跳转到仪表盘页面
-        //       } else {
-        //         this.errorMessage = '用户名或密码错误';
-        //       }
-        //     } catch (error) {
-        //       this.errorMessage = '登录失败，请稍后重试';
-        //     } finally {
-        //       this.isSubmitting = false;
-        //     }
-        //   },
-        //   async loginApi(username, password) {
-        //     // 这里可以用 axios 或 fetch 进行 API 请求
-        //     // 下面只是一个模拟的 API 调用
-        //     return new Promise((resolve, reject) => {
-        //       setTimeout(() => {
-        //         if (username === 'admin' && password === '1234') {
-        //           resolve({ success: true });
-        //         } else {
-        //           reject({ success: false });
-        //         }
-        //       }, 1000);
+            //     // 使用路由跳转到用户的 Dashboard 页面
+            //     this.$router.push(`/dashboard/${userId}`);
+            // } else {
+            //     alert('Login failed!');
+            // }
+        },
+
+        // // 模拟登录，实际项目中应该调用后端接口
+        // mockLogin(username, password) {
+        //     return new Promise((resolve) => {
+        //         setTimeout(() => {
+        //             // 假设我们通过用户名返回一个 id
+        //             resolve(username === 'admin' ? '123' : null);
+        //         }, 1000);
         //     });
-        //   }
+        // }
     }
 };
 </script>
